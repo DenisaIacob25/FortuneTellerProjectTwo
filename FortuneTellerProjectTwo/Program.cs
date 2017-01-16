@@ -11,38 +11,50 @@ namespace FortuneTellerProjectTwo
         static void Main(string[] args)
         {
             Console.WriteLine("To being your fortune telling session please follow the instructions below.");
+            Console.WriteLine("You may type \"Quit\" or \"Restart\" at any time. \n Press enter to begin!");
+            string quitRestartInput = Console.ReadLine().ToUpper();
+            string quitRestartCaps = quitRestartInput.ToUpper();
 
             Console.WriteLine("Enter your first name.");
             string firstName = Console.ReadLine();
+            QuitRestart(firstName); //quit restart method
 
             Console.WriteLine("Thank you " + firstName + ". Next please enter your last name.");
             string lastName = Console.ReadLine();
+            QuitRestart(lastName); //quit restart method
+
 
             //related to greetings method 
             Console.WriteLine(UserName(firstName, lastName));
+            QuitRestart(UserName(firstName, lastName)); //quit restart method
+
 
             //related to retires method
             Console.WriteLine("Please enter your age");
-            int age = int.Parse(Console.ReadLine());
+            string ageQuitRestart = Console.ReadLine();
+            QuitRestart(ageQuitRestart); //quit restart method
+            int age = int.Parse(ageQuitRestart);
             int retireYears = RetireAge(age);
             
 
-            //related to money when retire 
+            //related to money when retire method
             Console.WriteLine("Now that I know your age, please enter your birth month (digits only).");
-            int birthMonth = int.Parse(Console.ReadLine());
-            
+            string monthQuitRestart = Console.ReadLine();
+            QuitRestart(monthQuitRestart); //quit restart method because int
+            int birthMonth = int.Parse(monthQuitRestart);
             
 
-            //related to method for transport 
+            //related to transport method
             Console.WriteLine("To contiue with your fortune reader, what is your favorite ROYGBIV color?" + "\n" + "Please enter \"help\" for description of ROYGBIV.");
             string response = Console.ReadLine();
             string responseCaps = response.ToUpper();
-
+            QuitRestart(responseCaps);
             if (responseCaps == "HELP")
             {
                 Console.WriteLine("ROYGBIV COLORS: \nR is for Red. \nO is for Orange. \nY is for Yellow. \nG is for Green. \nB is for Blue. \nI is for Indigo. \nV is for Violet. \nEnter a ROYGBIV color: ");
                 response = Console.ReadLine();
                 responseCaps = response.ToUpper();
+                QuitRestart(responseCaps);
             }
             else
             {
@@ -52,21 +64,25 @@ namespace FortuneTellerProjectTwo
 
             //related to vacation home method
             Console.WriteLine("Enter the number of sibilings that you have.");
-            int siblings = int.Parse(Console.ReadLine());
+            string sibilingQuitRestart = Console.ReadLine();
+            QuitRestart(sibilingQuitRestart);
+            int siblings = int.Parse(sibilingQuitRestart);
+            
 
             //starting the fortune response.
             Console.WriteLine(firstName + " " + lastName +"," + " you will retire in " + retireYears + " years. " + "You will have $" + RetirementBankAccount(birthMonth) + " in the bank! (How exciting is that?)" + " You will also have " + VacationHome(siblings)+ "." + " In addition to all that awesomeness, you will also own " + TransportMode(responseCaps) + ".");
             FortuneQuality();
         }
-    
+        
 
         //start bulding methods here
         //method for greeting
         static string UserName(string firstName, string lastName)
         {
-            String greeting = "Greetings, " + firstName+ " " + lastName +" I will tell you your fortune!";
+            String greeting = "Greetings, " + firstName + " " + lastName +". I will tell you your fortune!";
             return greeting;
         }
+
         //method for years before retirement 
         static int RetireAge(int age)
         {
@@ -74,7 +90,7 @@ namespace FortuneTellerProjectTwo
 
             if (age % 2 == 0)  //figure out if the age is even or odd
             {
-                retireYears = 22;//even number
+                retireYears = 22; //even number
             }
             else
             {
@@ -82,6 +98,7 @@ namespace FortuneTellerProjectTwo
             }
             return retireYears;
         }
+
         //method for vacation home
         static string VacationHome(int siblings)
         {
@@ -114,8 +131,9 @@ namespace FortuneTellerProjectTwo
             }
             return userVaca;
         }
-            //method for transportation - ROYGBIV
-             static string TransportMode (string responseCaps)
+
+        //method for transportation - ROYGBIV
+        static string TransportMode (string responseCaps)
         {
             string userTransport = "";
 
@@ -141,11 +159,11 @@ namespace FortuneTellerProjectTwo
                     break;
                 case "VIOLET":
                     userTransport = ("an airplane");
-                    break;
-            
+                    break;          
         }
         return userTransport;
         }    
+
         //method for money when retire
         static double RetirementBankAccount (int birthMonth)
         {
@@ -169,6 +187,26 @@ namespace FortuneTellerProjectTwo
             }
             return money;
         }
+
+        //method for quit or restart
+        static void QuitRestart(string quitRestartInput)
+        {
+            string quitRestartCaps = quitRestartInput.ToUpper(); 
+            if (quitRestartCaps == "QUIT")
+            {
+                Console.WriteLine("Thank you for playing.");
+                Environment.Exit(0);
+            }
+            else if (quitRestartCaps == "RESTART")
+            {
+                Console.WriteLine("Resarting now...");
+                string[] args = { };
+                Console.Clear();
+                Main(args);
+                Environment.Exit(0);
+            }
+        }
+
         //method that judges fortune
         static void FortuneQuality()
         {
