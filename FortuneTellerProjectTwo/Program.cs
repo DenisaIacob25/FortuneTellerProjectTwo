@@ -58,7 +58,7 @@ namespace FortuneTellerProjectTwo
             }
             else
             {
-                Console.WriteLine("Your favorite color is: " + responseCaps);
+                Console.WriteLine("That is an invalid response, you get a squeaky shopping cart!");
             }
         
 
@@ -159,10 +159,14 @@ namespace FortuneTellerProjectTwo
                     break;
                 case "VIOLET":
                     userTransport = ("an airplane");
-                    break;          
+                    break;
+                default:
+                    userTransport = ("a squeaky shopping cart");
+                    break;    
         }
         return userTransport;
         }    
+
 
         //method for money when retire
         static double RetirementBankAccount (int birthMonth)
@@ -199,12 +203,13 @@ namespace FortuneTellerProjectTwo
             }
             else if (quitRestartCaps == "RESTART")
             {
-                Console.WriteLine("Resarting now...");
+                Console.WriteLine("Restarting now...");
                 string[] args = { };
                 Console.Clear();
                 Main(args);
                 Environment.Exit(0);
             }
+        
         }
 
         //method that judges fortune
